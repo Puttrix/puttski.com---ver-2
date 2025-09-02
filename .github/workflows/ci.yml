@@ -28,7 +28,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10.15.1
 
       - name: Get pnpm store directory
         id: pnpm-store
@@ -74,3 +74,37 @@ jobs:
       - name: Build
         if: ${{ steps.scripts.outputs.build == 'true' }}
         run: pnpm build
+
+      - name: Start app (background)
+        if: ${{ steps.scripts.outputs.build == 'true' }}
+        run: |
+          pnpm start -- -p 3000 >/dev/null 2>&1 &
+          echo $! > .next.pid
+          echo "Waiting for server..."
+          for i in {1..60}; do
+            if curl -fsS http://localhost:3000/robots.txt >/dev/null; then
+              echo "Server is up"; break;
+            fi
+            sleep 1
+          done
+
+      - name: Validate RSS endpoint
+        if: ${{ steps.scripts.outputs.build == 'true' }}
+        run: |
+          set -e
+          curl -fsS http://localhost:3000/rss.xml -H 'Accept: application/rss+xml' -o rss.xml
+          BYTES=$(wc -c < rss.xml | tr -d ' ')
+          if [ "$BYTES" -lt 200 ]; then
+            echo "RSS seems too small: ${BYTES} bytes"; exit 1;
+          fi
+          # Basic shape checks
+          grep -q '<rss' rss.xml
+          grep -q '<channel>' rss.xml
+          echo "RSS validated (size: ${BYTES} bytes)"
+
+      - name: Stop app
+        if: ${{ always() && steps.scripts.outputs.build == 'true' }}
+        run: |
+          if [ -f .next.pid ]; then
+            kill $(cat .next.pid) || true
+          fi

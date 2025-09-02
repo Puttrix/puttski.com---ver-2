@@ -43,4 +43,4 @@ Checklist to deploy and keep environments healthy.
 
 - Run `./scripts/setup-labels.sh` (once) and create a Project board
 - Open issues from `product/stories/` (see `scripts/create-issues-from-stories.sh`)
-- Start filling content for Services, About, Legal pages
+- Start filling content for About and Legal pages

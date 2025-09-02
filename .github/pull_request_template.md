@@ -29,6 +29,7 @@ Closes #<id> (and/or) Relates to #<id>
 - [ ] `pnpm lint` passes locally
 - [ ] `pnpm test` passes locally (and CI)
 - [ ] `pnpm build` succeeds (if relevant)
+- [ ] CI is green ("CI / Install, Lint, Test, Build")
 - [ ] Docs/ONBOARDING updated (if needed)
 - [ ] Labels set (Type + Priority)
 - [ ] Added to GitHub Project + Iteration (if planned)

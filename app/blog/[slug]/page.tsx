@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getPost, getPostSlugs } from '../../../lib/posts'
+import { JsonLd } from '../../../components/JsonLd'
 
 type Params = { params: { slug: string } }
 
@@ -31,8 +32,23 @@ export default async function BlogPostPage({ params }: Params) {
   const post = await getPost(params.slug)
   if (!post) return notFound()
   const { content, frontmatter } = post
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const url = `${siteUrl}/blog/${params.slug}`
   return (
     <article className="prose max-w-none">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+          headline: frontmatter.title,
+          datePublished: frontmatter.date,
+          dateModified: frontmatter.date,
+          author: { '@type': 'Person', name: 'Putte Arvfors', '@id': `${siteUrl}#person` },
+          image: [`${siteUrl}/img/H3I0509_2-600x569.webp`],
+          url,
+        }}
+      />
       <h1 className="mt-0">{frontmatter.title}</h1>
       <p className="m-0 text-sm opacity-70">
         {new Date(frontmatter.date).toLocaleDateString()}
@@ -42,4 +58,3 @@ export default async function BlogPostPage({ params }: Params) {
     </article>
   )
 }
-

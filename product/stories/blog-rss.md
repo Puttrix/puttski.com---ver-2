@@ -4,7 +4,7 @@ As a power user, I want to subscribe to the blog via RSS, so that I can read new
 
 - Priority: P2
 - Estimate: 0.5–1 day
-- Status: Planned
+- Status: Done
 - Related feature: `product/features/blog.md`
 
 ## Acceptance Criteria
@@ -22,9 +22,15 @@ As a power user, I want to subscribe to the blog via RSS, so that I can read new
 
 ## Tasks
 
-- [ ] Generate RSS from frontmatter (1–2h)
-- [ ] Validate feed using a validator and add `<link rel="alternate" ...>` in `<head>` (1h)
+- [x] Generate RSS from frontmatter (1–2h)
+- [x] Expose `<link rel="alternate" type="application/rss+xml">` globally
+- [x] Validate feed via CI by fetching `/rss.xml` and checking XML shape
 
 ## Definition of Done
 
 - Feed validates; readers can subscribe; link exposed in layout
+
+## Implementation Notes
+
+- Route added at `app/rss.xml/route.ts` with 20 latest posts from `lib/posts.ts`.
+- Global metadata exposes RSS via `app/layout.tsx` `metadata.alternates.types`.

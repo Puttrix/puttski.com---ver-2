@@ -26,7 +26,7 @@ Baseline details for fast onboarding. Update as the project evolves.
 - Name: puttski.com
 - One‑liner: Personal website and blog for Putte (puttski.com)
 - Primary stack: Next.js 14 + TypeScript + Tailwind CSS + MDX
-- Package manager: pnpm (v9 preferred)
+- Package manager: pnpm (v10 preferred; tested 10.15.1)
 - Hosting/Infra: Vercel (production + previews)
 - Data sources: Markdown/MDX content (`content/posts`) and static assets
 - Monorepo?: no
@@ -47,7 +47,7 @@ Document the important paths. Expand as needed.
 
 1) Prereqs
    - Node: 20.x LTS (use `nvm use` if `.nvmrc` exists)
-   - Package manager: pnpm v9
+   - Package manager: pnpm v10 (10.15.1)
    - Others: none
 
 2) Install
@@ -73,7 +73,7 @@ Document the important paths. Expand as needed.
 - Optional (client‑exposed):
   - `NEXT_PUBLIC_ANALYTICS_ID` — e.g., Google Analytics or Plausible site ID
 - Server‑side secrets: none expected for a static personal site
-- SEO endpoints: `/robots.txt` and `/sitemap.xml` use `NEXT_PUBLIC_SITE_URL`
+- SEO endpoints: `/robots.txt` and `/sitemap.xml` use `NEXT_PUBLIC_SITE_URL`; RSS feed at `/rss.xml`
 
 ## Scripts & Tooling
 
@@ -98,6 +98,7 @@ Canonical scripts (in `package.json`).
 
 - Framework: Vitest (unit) + optional Playwright (e2e)
 - Locations: co‑located `*.test.ts[x]` or `tests/`
+- Current coverage examples: `tests/components/Header.test.tsx`, `tests/lib/posts.test.tsx`
 - Commands: `pnpm test`, `pnpm test:watch`
 
 ## Git Workflow
@@ -115,6 +116,7 @@ Canonical scripts (in `package.json`).
 ## Content & Assets
 
 - Content: `content/` (Markdown/MDX) — pages/posts, images in `public/`
+- MDX pipeline: remark-gfm, rehype-slug, autolinked headings, and Shiki highlighting via rehype-pretty-code
 - Media: compress images; keep <2MB where possible
 - SEO: sitemap, robots, default meta in layout or config
 

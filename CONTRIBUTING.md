@@ -6,7 +6,7 @@ Thanks for helping improve puttski.com! This guide covers local setup, coding st
 
 - Requirements:
   - Node 20.x LTS
-  - pnpm v9
+  - pnpm v10 (tested with 10.15.1)
 - Install:
   - `pnpm install`
 - Common scripts:
@@ -33,6 +33,8 @@ Thanks for helping improve puttski.com! This guide covers local setup, coding st
 - Format: Prettier
 - Naming: kebab-case files; PascalCase components; camelCase functions
 
+Note: `react/no-unescaped-entities` is disabled to allow natural prose (quotes/apostrophes) in page copy.
+
 Before pushing:
 - `pnpm lint` and `pnpm format`
 - fix ESLint errors; avoid disabling rules casually
@@ -58,6 +60,15 @@ Before pushing:
 - Use PR template; fill summary, testing steps, and risk
 - At least one approval required (if enabled)
 - Squash and merge by default; keep commit message meaningful
+
+## Required CI Checks
+
+Enable branch protection on `main` with required status checks:
+
+- "CI / Install, Lint, Test, Build" must pass before merging
+  - Workflow: `.github/workflows/ci.yml` (name: CI)
+  - Job name: `Install, Lint, Test, Build`
+  - Optionally require branches to be up to date before merging
 
 ## Project Tracking
 

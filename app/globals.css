@@ -20,3 +20,22 @@ body {
   max-width: 72rem;
 }
 
+/* MDX code block tweaks (rehype-pretty-code) */
+.prose pre {
+  padding: 1rem; /* nicer spacing */
+}
+.prose pre code {
+  display: grid; /* one span.line per row */
+}
+.prose pre code .line {
+  display: block;
+}
+[data-line-numbers] .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2ch;
+  margin-right: 1ch;
+  opacity: 0.4;
+  text-align: right;
+}

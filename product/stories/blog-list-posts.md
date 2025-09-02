@@ -4,7 +4,7 @@ As a reader, I want to see a list of blog posts, so that I can browse recent con
 
 - Priority: P1
 - Estimate: 1–2 days
-- Status: Planned
+- Status: In progress (index + pagination shipped)
 - Related feature: `product/features/blog.md`
 
 ## Acceptance Criteria
@@ -24,9 +24,9 @@ As a reader, I want to see a list of blog posts, so that I can browse recent con
 
 ## Tasks
 
-- [ ] Create `content/posts` with 2 MDX example posts (2h)
-- [ ] Add blog index route (`/blog`) with pagination (3h)
-- [ ] Post card component: title, date, summary, tags (2h)
+- [x] Create `content/posts` with 2 MDX example posts (2h)
+- [x] Add blog index route (`/blog`) with pagination (3h)
+- [x] Post card component: title, date, summary, tags (2h)
 - [ ] Basic SEO for index page (title, description, OG tags) (1h)
 - [ ] Tests: render index with 0/5/15 posts (2h)
 

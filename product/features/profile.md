@@ -3,7 +3,7 @@
 - Outcome: Visitors immediately understand who you are and your core value.
 - Success metrics: >60% scroll depth on home; CTR to Services/Contact >10%.
 - Owner: Web
-- Status: Planned
+- Status: In progress
 
 ## Context
 
@@ -11,8 +11,8 @@ Make the homepage hero and About section highlight your expertise (Web Analytics
 
 ## User Stories
 
-- [ ] Hero with value proposition & primary CTA — `product/stories/profile-hero.md`
-- [ ] About section with photo and short bio — `product/stories/profile-about.md`
+- [x] Hero with value proposition & primary CTA — `product/stories/profile-hero.md`
+ - [ ] About section with photo and short bio — `product/stories/profile-about.md`
 
 ## Dependencies
 

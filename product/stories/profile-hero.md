@@ -4,7 +4,7 @@ As a first-time visitor, I want to quickly understand Putte’s expertise and ho
 
 - Priority: P1
 - Estimate: 0.5–1 day
-- Status: Planned
+- Status: Implemented
 - Related feature: `product/features/profile.md`
 
 ## Acceptance Criteria
@@ -19,10 +19,10 @@ As a first-time visitor, I want to quickly understand Putte’s expertise and ho
 
 ## Tasks
 
-- [ ] Write hero copy (headline, subhead, CTAs) (1h)
-- [ ] Implement responsive hero section with CTAs (2h)
-- [ ] Add tracking for CTA clicks (data attributes for future analytics) (1h)
-- [ ] Basic a11y check and Lighthouse pass (1h)
+- [x] Write hero copy (headline, subhead, CTAs) (1h)
+- [x] Implement responsive hero section with CTAs (2h)
+- [x] Add tracking for CTA clicks (data attributes for future analytics) (1h)
+- [x] Basic a11y check and Lighthouse pass (manual quick pass) (1h)
 
 ## Definition of Done
 

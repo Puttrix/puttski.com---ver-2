@@ -3,7 +3,7 @@
 - Outcome: Readers can browse, read, and subscribe to posts.
 - Success metrics: Pages load < 2s; valid RSS; basic SEO passes.
 - Owner: Web
-- Status: In progress
+- Status: In progress (MVP shipped)
 
 ## Context
 
@@ -13,7 +13,7 @@ Add a minimal blog to publish articles with images and code snippets. Prioritize
 
 - [x] List posts (index) — `product/stories/blog-list-posts.md`
 - [x] Read a post (MDX, images, code) — `product/stories/blog-read-post.md`
-- [ ] RSS subscription — `product/stories/blog-rss.md`
+- [x] RSS subscription — `product/stories/blog-rss.md`
 
 ## Dependencies
 
@@ -24,3 +24,4 @@ Add a minimal blog to publish articles with images and code snippets. Prioritize
 
 - Use `next/image` for images; ensure accessible alt text
 - Add default SEO (title/description/OG) on index and post pages
+ - MDX highlighting with Shiki via rehype-pretty-code

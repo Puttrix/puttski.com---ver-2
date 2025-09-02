@@ -1,7 +1,7 @@
 # Feature: Case Studies & Results
 
 - Outcome: Demonstrate impact through concise case studies with metrics.
-- Success metrics: Case Studies page CTR to Contact/Services >12%.
+- Success metrics: Case Studies page CTR to Contact >12%.
 - Owner: Web
 - Status: Planned
 

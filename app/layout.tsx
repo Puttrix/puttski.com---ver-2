@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Link from 'next/link'
 import { JsonLd } from '../components/JsonLd'
 import { Footer } from '../components/Footer'
+import { Header } from '../components/Header'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     template: '%s · Putte Arvfors',
   },
   manifest: '/manifest.webmanifest',
+  alternates: {
+    types: {
+      'application/rss+xml': '/rss.xml',
+    },
+  },
   description:
     'Matomo‑first analytics, SEO/AEO/GEO, experimentation, and privacy‑first data practices (GDPR).',
   openGraph: {
@@ -97,21 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             ],
           }}
         />
-        <header className="sticky top-0 z-50 border-b bg-white/70 dark:bg-black/40 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/30">
-          <div className="container mx-auto flex items-center justify-between gap-4 p-4">
-            <Link href="/" className="font-bold">puttski.com</Link>
-            <nav className="hidden md:flex gap-4 text-sm">
-              <Link href="/services">Services</Link>
-              <Link href="/skills">Skills</Link>
-              <Link href="/certifications">Certifications</Link>
-              <Link href="/cases">Case Studies</Link>
-              <Link href="/stack">Stack</Link>
-              <Link href="/privacy">Privacy</Link>
-              <Link href="/blog">Blog</Link>
-            </nav>
-            <Link href="/contact" className="inline-flex items-center rounded bg-blue-600 px-3 py-1.5 text-white hover:bg-blue-700">Contact</Link>
-          </div>
-        </header>
+        <Header />
         <main className="container mx-auto p-4">{children}</main>
         <Footer />
       </body>

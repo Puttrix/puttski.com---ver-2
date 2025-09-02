@@ -1,10 +1,10 @@
-# Story: Services overview with offerings and outcomes
+# Story: Services overview with offerings and outcomes (Dropped)
 
 As a prospective client, I want to understand the services offered and expected outcomes, so that I can decide to engage.
 
 - Priority: P1
 - Estimate: 1 day
-- Status: Planned
+- Status: Dropped (not applicable)
 - Related feature: `product/features/services.md`
 
 ## Acceptance Criteria
@@ -18,6 +18,6 @@ As a prospective client, I want to understand the services offered and expected 
 - [ ] Implement responsive cards/sections with anchors (2h)
 - [ ] Add FAQ section for common questions (1h)
 
-## Definition of Done
+## Notes
 
-- Services content complete; layout responsive; clear CTAs present
+- The Services page was removed because the site is not for freelance offerings.

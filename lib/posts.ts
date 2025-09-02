@@ -5,6 +5,7 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrettyCode from 'rehype-pretty-code'
 
 export type PostFrontmatter = {
   title: string
@@ -18,6 +19,8 @@ export type PostListItem = PostFrontmatter & {
 }
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts')
+
+export const POSTS_PER_PAGE = Number(process.env.BLOG_POSTS_PER_PAGE || 10)
 
 export function getPostSlugs(): string[] {
   if (!fs.existsSync(POSTS_DIR)) return []
@@ -54,10 +57,30 @@ export async function getPost(slug: string) {
       parseFrontmatter: true,
       mdxOptions: {
         remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+        rehypePlugins: [
+          rehypeSlug,
+          [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+          [
+            rehypePrettyCode,
+            {
+              // Use GitHub themes; no background to blend with prose
+              theme: { light: 'github-light', dark: 'github-dark' },
+              keepBackground: false,
+            },
+          ],
+        ],
       },
     },
   })
   return { slug, content, frontmatter }
 }
 
+export function paginatePosts(page: number, perPage: number = POSTS_PER_PAGE) {
+  const all = listPosts()
+  const total = all.length
+  const totalPages = Math.max(1, Math.ceil(total / perPage))
+  const p = Math.min(Math.max(1, page), totalPages)
+  const start = (p - 1) * perPage
+  const items = all.slice(start, start + perPage)
+  return { items, page: p, perPage, total, totalPages }
+}

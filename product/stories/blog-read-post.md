@@ -4,7 +4,7 @@ As a reader, I want to read a blog post with images and code formatting, so that
 
 - Priority: P1
 - Estimate: 1–2 days
-- Status: Planned
+- Status: In progress (MVP shipped)
 - Related feature: `product/features/blog.md`
 
 ## Acceptance Criteria
@@ -25,8 +25,8 @@ As a reader, I want to read a blog post with images and code formatting, so that
 
 ## Tasks
 
-- [ ] Post page route with dynamic slug (2h)
-- [ ] MDX rendering with rehype/remark plugins for code (3h)
+- [x] Post page route with dynamic slug (2h)
+- [x] MDX rendering with rehype/remark plugins for code (3h)
 - [ ] Image component styles + captions (2h)
 - [ ] Prev/Next links and canonical URLs (1h)
 - [ ] Accessibility pass (headings, landmarks, contrast) (1h)

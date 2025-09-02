@@ -4,7 +4,7 @@ As a prospective client, I want a concise bio with a photo and highlights, so th
 
 - Priority: P1
 - Estimate: 0.5–1 day
-- Status: Planned
+- Status: In progress
 - Related feature: `product/features/profile.md`
 
 ## Acceptance Criteria
@@ -17,7 +17,7 @@ As a prospective client, I want a concise bio with a photo and highlights, so th
 
 - [ ] Collect photo and write 3–5 highlight bullets (1h)
 - [ ] Implement About section layout and styles (2h)
-- [ ] Add link to full resume/CV page (or PDF) (1h)
+- [x] Add link to full resume/CV page (or About page) (1h)
 
 ## Definition of Done
 

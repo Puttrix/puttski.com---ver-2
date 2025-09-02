@@ -9,7 +9,7 @@ As a prospective client, I want to book a call directly, so that I can quickly s
 
 ## Acceptance Criteria
 
-- Given the Contact/Services page Then I can open an embedded scheduler or a modal to book time
+- Given the Contact page Then I can open an embedded scheduler or a modal to book time
 - Given mobile Then the embed/modal is usable
 
 ## Tasks

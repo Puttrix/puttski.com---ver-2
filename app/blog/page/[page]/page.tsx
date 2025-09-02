@@ -1,10 +1,25 @@
 import Link from 'next/link'
-import { paginatePosts } from '../../lib/posts'
+import { notFound, redirect } from 'next/navigation'
+import { paginatePosts, listPosts, POSTS_PER_PAGE } from '../../../../lib/posts'
+
+type Params = { params: { page: string } }
 
 export const revalidate = 60
 
-export default function BlogIndexPage() {
-  const { items: posts, page, totalPages } = paginatePosts(1)
+export function generateStaticParams() {
+  const total = listPosts().length
+  const totalPages = Math.max(1, Math.ceil(total / POSTS_PER_PAGE))
+  // Generate only pages >= 2 to avoid duplicate of /blog
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({ page: String(i + 2) }))
+}
+
+export default function BlogPageNumber({ params }: Params) {
+  const n = Number(params.page)
+  if (!Number.isFinite(n) || n < 1) return notFound()
+  if (n === 1) return redirect('/blog')
+  const { items: posts, page, totalPages } = paginatePosts(n)
+  if (page !== n) return notFound()
+
   return (
     <section className="prose max-w-none">
       <h1>Blog</h1>
