@@ -78,21 +78,25 @@ jobs:
       - name: Start app (background)
         if: ${{ steps.scripts.outputs.build == 'true' }}
         run: |
-          pnpm start -- -p 3000 >/dev/null 2>&1 &
+          NEXT_PUBLIC_SITE_URL=http://localhost:3000 pnpm start -- -p 3000 -H 127.0.0.1 >/dev/null 2>&1 &
           echo $! > .next.pid
           echo "Waiting for server..."
+          READY=0
           for i in {1..60}; do
-            if curl -fsS http://localhost:3000/robots.txt >/dev/null; then
-              echo "Server is up"; break;
+            if curl -fsS http://127.0.0.1:3000/robots.txt >/dev/null; then
+              echo "Server is up"; READY=1; break;
             fi
             sleep 1
           done
+          if [ "$READY" != "1" ]; then
+            echo "Server did not start in time"; cat .next.pid || true; exit 1;
+          fi
 
       - name: Validate RSS endpoint
         if: ${{ steps.scripts.outputs.build == 'true' }}
         run: |
           set -e
-          curl -fsS http://localhost:3000/rss.xml -H 'Accept: application/rss+xml' -o rss.xml
+          curl -fsS http://127.0.0.1:3000/rss.xml -H 'Accept: application/rss+xml' -o rss.xml
           BYTES=$(wc -c < rss.xml | tr -d ' ')
           if [ "$BYTES" -lt 200 ]; then
             echo "RSS seems too small: ${BYTES} bytes"; exit 1;
