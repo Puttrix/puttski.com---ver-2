@@ -78,18 +78,26 @@ jobs:
       - name: Start app (background)
         if: ${{ steps.scripts.outputs.build == 'true' }}
         run: |
-          NEXT_PUBLIC_SITE_URL=http://localhost:3000 pnpm start -- -p 3000 -H 127.0.0.1 >/dev/null 2>&1 &
+          export HOST=127.0.0.1
+          export PORT=3000
+          export NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3000
+          export NODE_ENV=production
+          echo "Starting Next on $HOST:$PORT..."
+          pnpm start > .next.log 2>&1 &
           echo $! > .next.pid
           echo "Waiting for server..."
           READY=0
-          for i in {1..60}; do
+          for i in {1..120}; do
             if curl -fsS http://127.0.0.1:3000/robots.txt >/dev/null; then
               echo "Server is up"; READY=1; break;
             fi
+            if [ $((i % 10)) -eq 0 ]; then echo "...still waiting ($i s)"; fi
             sleep 1
           done
           if [ "$READY" != "1" ]; then
-            echo "Server did not start in time"; cat .next.pid || true; exit 1;
+            echo "Server did not start in time";
+            echo "---- .next.log ----"; sed -n '1,200p' .next.log || true; echo "-------------------";
+            exit 1;
           fi
 
       - name: Validate RSS endpoint
