@@ -6,19 +6,20 @@ Update freely. Prefer short, actionable items over long prose.
 
 ## Now
 
-- [ ] Confirm `codex/ONBOARDING.md` reflects the chosen stack.
-- [ ] Add a top‑level `README.md` (project overview, quickstart, scripts).
-- [ ] Decide content structure (`content/` for MDX posts/pages) and routing.
+- [x] Confirm `codex/ONBOARDING.md` reflects the chosen stack.
+- [x] Add a top‑level `README.md` (project overview, quickstart, scripts).
+- [x] Decide content structure (`content/` for MDX posts/pages) and routing.
 
 ## Next
 
-- [ ] Add `.env.example` with `NEXT_PUBLIC_SITE_URL` and optional analytics ID.
-- [ ] Add `dev`, `build`, `start`, `lint`, `format`, and `test` scripts in `package.json`.
-- [ ] Configure Prettier + ESLint (Next.js + TS) and `eslint-plugin-import`.
+- [x] Add `.env.example` with `NEXT_PUBLIC_SITE_URL` and optional analytics ID.
+- [x] Add `dev`, `build`, `start`, `lint`, `format`, and `test` scripts in `package.json`.
+- [x] Configure Prettier + ESLint (Next.js + TS) and `eslint-plugin-import`.
 
 ## Later
 
-- [ ] Set up CI (install, lint, test, build) and required checks on PRs.
+- [x] Set up CI (install, lint, test, build) — see `.github/workflows/ci.yml`.
+- [ ] Enable required checks on PRs in GitHub settings.
 - [ ] Add end‑to‑end or visual tests if applicable.
 - [ ] Create a `CONTRIBUTING.md` for external collaborators.
 

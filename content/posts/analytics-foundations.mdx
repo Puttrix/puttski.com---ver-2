@@ -1,0 +1,25 @@
+---
+title: Analytics Foundations
+date: 2025-02-05
+summary: A pragmatic baseline for trustworthy analytics: events, consent, and governance.
+tags:
+  - analytics
+  - governance
+---
+
+Reliable analytics starts with a clear data model and responsible consent.
+
+1. Define events and properties before implementation.
+2. Prefer privacy‑by‑design collection.
+3. Document decisions and changes for future you.
+
+> Matomo‑first; GA4/GTM and PostHog where appropriate.
+
+```js
+// Minimal event shape example
+const event = {
+  name: 'cta_click',
+  props: { label: 'contact', location: 'hero' }
+}
+```
+

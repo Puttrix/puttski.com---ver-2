@@ -3,7 +3,7 @@
 - Outcome: Readers can browse, read, and subscribe to posts.
 - Success metrics: Pages load < 2s; valid RSS; basic SEO passes.
 - Owner: Web
-- Status: Planned
+- Status: In progress
 
 ## Context
 
@@ -11,8 +11,8 @@ Add a minimal blog to publish articles with images and code snippets. Prioritize
 
 ## User Stories
 
-- [ ] List posts with pagination — `product/stories/blog-list-posts.md`
-- [ ] Read a post (MDX, images, code) — `product/stories/blog-read-post.md`
+- [x] List posts (index) — `product/stories/blog-list-posts.md`
+- [x] Read a post (MDX, images, code) — `product/stories/blog-read-post.md`
 - [ ] RSS subscription — `product/stories/blog-rss.md`
 
 ## Dependencies

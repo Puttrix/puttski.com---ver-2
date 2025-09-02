@@ -25,10 +25,10 @@ Baseline details for fast onboarding. Update as the project evolves.
 
 - Name: puttski.com
 - One‑liner: Personal website and blog for Putte (puttski.com)
-- Primary stack: Next.js 14 + TypeScript + Tailwind CSS
+- Primary stack: Next.js 14 + TypeScript + Tailwind CSS + MDX
 - Package manager: pnpm (v9 preferred)
 - Hosting/Infra: Vercel (production + previews)
-- Data sources: Markdown/MDX content and static assets
+- Data sources: Markdown/MDX content (`content/posts`) and static assets
 - Monorepo?: no
 
 ## Repo Map
@@ -39,6 +39,7 @@ Document the important paths. Expand as needed.
 - `codex/` — this onboarding and automation artifacts
 - `src/` — application code (if applicable)
 - `public/` — static assets
+- `content/` — MDX blog posts
 - `scripts/` — maintenance scripts
 - `infra/` — IaC, deploy configs
 
@@ -55,6 +56,7 @@ Document the important paths. Expand as needed.
 3) Develop
    - `pnpm dev` — start Next.js dev server
    - Default port: 3000
+   - Blog content under `content/posts/*.mdx`
 
 4) Build
    - `pnpm build` — production build (Next.js)
@@ -71,6 +73,7 @@ Document the important paths. Expand as needed.
 - Optional (client‑exposed):
   - `NEXT_PUBLIC_ANALYTICS_ID` — e.g., Google Analytics or Plausible site ID
 - Server‑side secrets: none expected for a static personal site
+- SEO endpoints: `/robots.txt` and `/sitemap.xml` use `NEXT_PUBLIC_SITE_URL`
 
 ## Scripts & Tooling
 
@@ -126,6 +129,7 @@ Canonical scripts (in `package.json`).
 - “Add a new page/component”: place under `src/...`, export default, update routes.
 - “Wire an API call”: create `lib/api.ts` (or similar), handle errors, type responses.
 - “Create content type”: define schema, add example, update renderers.
+- “Add a blog post”: create `content/posts/<slug>.mdx` with frontmatter (title, date, summary, tags).
 - “Debug build error”: run build, read stack, open referenced files, propose patch.
 
 ## Maintenance
