@@ -69,7 +69,7 @@ jobs:
 
       - name: Test
         if: ${{ steps.scripts.outputs.test == 'true' }}
-        run: pnpm test -- --run
+        run: pnpm test
 
       - name: Build
         if: ${{ steps.scripts.outputs.build == 'true' }}
