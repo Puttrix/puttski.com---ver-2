@@ -77,6 +77,31 @@ Personal website and blog for Putte. Built with Next.js 14, TypeScript, and Tail
 - Tests: Vitest + Testing Library; see `tests/components/Header.test.tsx` and `tests/lib/posts.test.tsx`
 - ESLint: `react/no-unescaped-entities` disabled to allow natural prose in JSX
 
+## Prep Environment (Portainer + Existing Cloudflare Tunnel)
+
+- Domain: `https://prep.puttski.com`
+- Robots: blocked by default via `DISALLOW_ROBOTS=1`
+
+1) Build artifacts (Portainer will build):
+   - Files: `Dockerfile`, `.dockerignore`, `docker-compose.prep.yml`
+
+2) Portainer — Deploy the stack (app only)
+   - Stacks → Add stack → paste `docker-compose.prep.yml`
+   - Environment variables:
+     - `NEXT_PUBLIC_SITE_URL`: `https://prep.puttski.com`
+     - `DISALLOW_ROBOTS`: `1`
+   - Deploy the stack (publishes host port 3000)
+
+3) Configure your existing Cloudflare Tunnel
+   - Route `prep.puttski.com` → `http://localhost:3000` (or the server’s LAN IP:3000)
+   - Alternatively, if your tunnel runs in Docker on a shared network, you can
+     remove the port publish and attach both services to the same external network.
+
+4) Verify
+   - Open `https://prep.puttski.com` → site loads
+   - `https://prep.puttski.com/robots.txt` shows `Disallow: /`
+   - RSS: `https://prep.puttski.com/rss.xml`
+
 ## Next Up
 
 - Toggle Header button aria-label between “Open menu”/“Close menu” when toggled

@@ -16,7 +16,8 @@
     "plugins": [
       { "name": "next" }
     ],
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["vitest/globals", "node"]
   },
   "include": [
     "next-env.d.ts",
@@ -28,4 +29,3 @@
     "node_modules"
   ]
 }
-
