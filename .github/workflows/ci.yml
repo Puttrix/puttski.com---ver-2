@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Install, Lint, Test, Build
+    runs-on: ubuntu-latest
+    if: ${{ hashFiles('**/package.json') != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Get pnpm store directory
+        id: pnpm-store
+        run: echo "store-dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.store-dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Detect scripts
+        id: scripts
+        shell: bash
+        run: |
+          if [ ! -f package.json ]; then
+            echo "lint=false" >> $GITHUB_OUTPUT
+            echo "test=false" >> $GITHUB_OUTPUT
+            echo "build=false" >> $GITHUB_OUTPUT
+            echo "typecheck=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          node -e "const s=require('./package.json').scripts||{}; const out=['lint','test','build','typecheck'].map(k=>k+'='+(s[k]?'true':'false')).join('\n'); require('fs').appendFileSync(process.env.GITHUB_OUTPUT,out+'\n')"
+
+      - name: Lint
+        if: ${{ steps.scripts.outputs.lint == 'true' }}
+        run: pnpm lint
+
+      - name: Typecheck
+        if: ${{ steps.scripts.outputs.typecheck == 'true' }}
+        run: pnpm typecheck
+
+      - name: Test
+        if: ${{ steps.scripts.outputs.test == 'true' }}
+        run: pnpm test -- --run
+
+      - name: Build
+        if: ${{ steps.scripts.outputs.build == 'true' }}
+        run: pnpm build
+
