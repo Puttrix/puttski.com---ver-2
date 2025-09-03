@@ -5,6 +5,8 @@ services:
     image: ghcr.io/puttrix/puttski-web:prep-latest
     pull_policy: always
     restart: unless-stopped
+    env_file:
+      - stack.env
     environment:
       NODE_ENV: ${NODE_ENV}
       NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
