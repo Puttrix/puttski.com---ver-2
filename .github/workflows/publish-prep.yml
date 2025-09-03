@@ -47,3 +47,14 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Trigger Portainer redeploy (prep)
+        if: ${{ secrets.PORTAINER_WEBHOOK_PREP != '' }}
+        run: |
+          set -e
+          echo "Triggering Portainer webhook..."
+          # Try POST first, then fallback to GET for older Portainer versions
+          if ! curl -fsS -X POST "${{ secrets.PORTAINER_WEBHOOK_PREP }}" -H 'Content-Type: application/json' -d '{}' >/dev/null; then
+            echo "POST failed, trying GET";
+            curl -fsS "${{ secrets.PORTAINER_WEBHOOK_PREP }}" >/dev/null;
+          fi
+          echo "Redeploy triggered"

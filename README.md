@@ -85,6 +85,9 @@ Personal website and blog for Putte. Built with Next.js 14, TypeScript, and Tail
 1) CI builds and publishes the image to GHCR
    - Workflow: `.github/workflows/publish-prep.yml` (triggers on push to `main`)
    - Image: `ghcr.io/<owner>/puttski-web:prep-latest` and `:prep-<sha>`
+   - Optional auto-redeploy: create a Portainer Stack webhook and add its URL as
+     a GitHub secret named `PORTAINER_WEBHOOK_PREP`. The workflow will call it
+     after pushing the image so the stack pulls the latest and redeploys.
 
 2) Portainer — Add GHCR registry credentials (once)
    - Settings → Registries → Add registry → GitHub Container Registry
