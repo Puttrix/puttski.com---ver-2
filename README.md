@@ -92,10 +92,17 @@ Personal website and blog for Putte. Built with Next.js 14, TypeScript, and Tail
    - Password/Token: a PAT with `read:packages`
 
 3) Portainer — Deploy the stack (app only)
-   - Stacks → Add stack → paste `docker-compose.prep.yml`
-   - Environment variables:
-     - `NEXT_PUBLIC_SITE_URL`: `https://prep.puttski.com`
-     - `DISALLOW_ROBOTS`: `1`
+   - For Repository mode (public repo):
+     - Repository URL: this repo
+     - Reference: your branch (e.g., `main`)
+     - Compose path: `docker-compose.prep.yml`
+     - Portainer uses an env file named `stack.env` from the repo root.
+       Ensure `stack.env` exists with the required variables (this repo includes one):
+       - `NODE_ENV=production`
+       - `NEXT_PUBLIC_SITE_URL=https://prep.puttski.com`
+       - `SITE_URL=https://prep.puttski.com`
+       - `DISALLOW_ROBOTS=1`
+   - For Web editor mode: paste `docker-compose.prep.yml`, then set the same variables in the UI (Portainer will generate `stack.env`).
    - Deploy the stack (publishes host port 3000)
 
 4) Configure your existing Cloudflare Tunnel
